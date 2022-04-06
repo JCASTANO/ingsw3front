@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { PersonaComponent } from './persona/persona.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MaterialExampleModule} from './material.module';
+import { GlobalErrorHandler } from './global-error-handler';
 
 
 
@@ -25,7 +26,10 @@ import {MaterialExampleModule} from './material.module';
     BrowserAnimationsModule,
     MaterialExampleModule
   ],
-  providers: [],
+  providers: [{
+    provide: ErrorHandler,
+    useClass: GlobalErrorHandler,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

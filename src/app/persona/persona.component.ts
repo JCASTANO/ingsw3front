@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Persona} from './persona';
 import { PersonaService } from './persona.service';
 
@@ -36,7 +36,9 @@ export class PersonaComponent implements OnInit {
 
   @ViewChild(MatTable) table!: MatTable<Persona>;
 
-  constructor(private personaService: PersonaService, private notification: MatSnackBar) {}
+  constructor(private personaService: PersonaService, private notification: MatSnackBar) {
+    this.dataSource = new MatTableDataSource();
+  }
   
   ngOnInit(): void {
     this.listar();
