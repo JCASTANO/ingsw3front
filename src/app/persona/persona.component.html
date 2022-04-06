@@ -1,8 +1,26 @@
-<div class="demo-button-container">
-  <button mat-raised-button (click)="onClickCrear()" class="demo-button">
+<form class="example-form" [formGroup]="personaForm">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input type="text" matInput formControlName="nombre" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="personaForm.controls['nombre'].hasError('required')">
+      Nombre es <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Apellido</mat-label>
+    <input type="text" matInput formControlName="apellido" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="personaForm.controls['apellido'].hasError('required')">
+      Apellido es <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button (click)="onClickCrear()" class="demo-button" [disabled]="!personaForm.valid">
     Crear
   </button>
-</div>
+</form>
+
+<br>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
