@@ -32,12 +32,12 @@ export class PersonaComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   displayedColumns: string[] = ['nombre', 'apellido'];
-  dataSource: any;
+  personas: any;
 
   @ViewChild(MatTable) table!: MatTable<Persona>;
 
   constructor(private personaService: PersonaService, private notification: MatSnackBar) {
-    this.dataSource = new MatTableDataSource();
+    this.personas = new MatTableDataSource();
   }
   
   ngOnInit(): void {
@@ -46,12 +46,13 @@ export class PersonaComponent implements OnInit {
 
   private listar() {
     this.personaService.getAll().subscribe(respuesta => {
-      this.dataSource = respuesta;
+      this.personas = respuesta;
       this.table.renderRows();
     });
   }
 
   onClickCrear() : void {
+
     this.personaService.add(this.personaForm.value).subscribe(respuesta => {
       this.notification.open('Creación exitosa');
       this.listar();

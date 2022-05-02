@@ -1,4 +1,5 @@
-<form class="example-form" [formGroup]="personaForm">
+<form [formGroup]="personaForm">
+  
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Nombre</mat-label>
     <input type="text" matInput formControlName="nombre" [errorStateMatcher]="matcher">
@@ -6,6 +7,7 @@
       Nombre es <strong>obligatorio</strong>
     </mat-error>
   </mat-form-field>
+
   <br>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Apellido</mat-label>
@@ -15,6 +17,7 @@
     </mat-error>
   </mat-form-field>
   <br>
+
   <button mat-raised-button (click)="onClickCrear()" class="demo-button" [disabled]="!personaForm.valid">
     Crear
   </button>
@@ -22,7 +25,7 @@
 
 <br>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+<table mat-table [dataSource]="personas" class="mat-elevation-z8 demo-table">
 
   <ng-container matColumnDef="nombre">
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
