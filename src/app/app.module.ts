@@ -6,16 +6,20 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PersonaComponent } from './persona/persona.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MaterialExampleModule} from './material.module';
 import { GlobalErrorHandler } from './global-error-handler';
+import { JwtInterceptor } from './jwt.interceptor';
+import { AutorizacionGuard } from './autorizacion.guard';
+import { HelpComponent } from './help/help.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PersonaComponent
+    PersonaComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,10 @@ import { GlobalErrorHandler } from './global-error-handler';
   providers: [{
     provide: ErrorHandler,
     useClass: GlobalErrorHandler,
-  }],
+  },
+  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  AutorizacionGuard,
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
