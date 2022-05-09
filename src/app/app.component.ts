@@ -12,4 +12,8 @@ export class AppComponent {
     localStorage.setItem('token','un token falso');
   }
 
+  onClickCrear() : void {
+    console.log('creado');
+  }
+
 }
