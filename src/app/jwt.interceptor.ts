@@ -9,9 +9,12 @@ export class JwtInterceptor implements HttpInterceptor {
 
         let token = localStorage.getItem("token");
 
-        request = request.clone({
-            setHeaders: { Authorization: `${token}` }
-        });
+        if(token) {
+            
+            request = request.clone({
+                setHeaders: { Authorization: `${token}` }
+            });
+        }
 
         return next.handle(request);
     }

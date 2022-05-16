@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'my-app';
 
   constructor() {
-    localStorage.setItem('token','un token falso');
+    //localStorage.setItem('token','un token falso');
   }
 
   onClickCrear() : void {
