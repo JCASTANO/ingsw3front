@@ -3,8 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Persona } from './persona';
 
-//const urlApi = '/api/personas';
-const urlApi = 'http://localhost:8081/api/personas';
+//npm start
+const urlApi = '/api/personas';
+
+//ng serve
+//const urlApi = 'http://localhost:8081/api/personas';
 
 @Injectable({
   providedIn: 'root'
