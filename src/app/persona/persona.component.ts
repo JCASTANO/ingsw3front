@@ -8,6 +8,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
 
 import {MatSnackBar} from '@angular/material/snack-bar';
 
+import { saveAs as importedSaveAs } from 'file-saver';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -56,6 +58,13 @@ export class PersonaComponent implements OnInit {
     this.personaService.add(this.personaForm.value).subscribe(respuesta => {
       this.notification.open('Creación exitosa');
       this.listar();
+    });
+  }
+
+  onClickExcelReport() : void {
+    this.personaService.excelReport().subscribe((blob) => {
+      const fileName = `Reporte.xls`;
+      importedSaveAs(blob, fileName);
     });
   }
 
