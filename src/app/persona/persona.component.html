@@ -28,7 +28,7 @@
 
 <br>
 
-<table mat-table [dataSource]="personas" class="mat-elevation-z8 demo-table">
+<table mat-table [dataSource]="personas()" class="mat-elevation-z8 demo-table">
 
   <ng-container matColumnDef="nombre">
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -43,3 +43,13 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+@if (personas().length === 0) {
+  <p>No hay personas</p>
+} @else {
+  <ul>
+    @for (persona of personas(); track persona.nombre) {
+      <li>{{ persona.nombre }} {{ persona.apellido }}</li>
+    }
+  </ul>
+}

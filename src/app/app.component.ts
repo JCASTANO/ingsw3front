@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,13 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
+  title = signal('my-app');
 
   constructor() {
     //localStorage.setItem('token','un token falso');
   }
 
   onClickCrear() : void {
+    this.title.set('clicked');
     console.log('creado');
   }
 
