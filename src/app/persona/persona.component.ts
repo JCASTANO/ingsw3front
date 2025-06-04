@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, signal, computed, inject} from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Persona} from './persona';
 import { PersonaService } from './persona.service';
@@ -34,13 +34,15 @@ export class PersonaComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   displayedColumns: string[] = ['nombre', 'apellido'];
-  personas: any;
+  personasSignal = signal<Persona[]>([]);
+  dataSource = computed(() => new MatTableDataSource(this.personasSignal()));
 
   @ViewChild(MatTable) table!: MatTable<Persona>;
 
-  constructor(private personaService: PersonaService, private notification: MatSnackBar) {
-    this.personas = new MatTableDataSource();
-  }
+  private personaService = inject(PersonaService);
+  private notification = inject(MatSnackBar);
+
+  constructor() {}
   
   ngOnInit(): void {
     this.listar();
@@ -48,7 +50,7 @@ export class PersonaComponent implements OnInit {
 
   private listar() {
     this.personaService.getAll().subscribe(respuesta => {
-      this.personas = respuesta;
+      this.personasSignal.set(respuesta as unknown as Persona[]);
       this.table.renderRows();
     });
   }
