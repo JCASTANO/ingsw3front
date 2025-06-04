@@ -28,8 +28,8 @@ export class PersonaService {
       .pipe(map((respuesta) => new Blob([respuesta])));
   }
 
-  getAll() : Observable<Persona> {
-    return this.http.get<Persona>(urlApi);
+  getAll(): Observable<Persona[]> {
+    return this.http.get<Persona[]>(urlApi);
   }
 
   add(persona: Persona) {

@@ -1,4 +1,7 @@
 <router-outlet></router-outlet>
-<div class="content">
-    <span>my-app app is running!</span>
-</div>
+@if (title() !== '') {
+  <div class="content">
+      <span>{{ title() }} app is running!</span>
+  </div>
+}
+<button (click)="onClickCrear()">Cambiar</button>
